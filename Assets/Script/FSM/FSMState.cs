@@ -5,14 +5,16 @@ namespace RisingTide.Fsm
     public class FSMState
     {
         protected int m_id;
+		protected string m_name;
         protected bool m_bDefault;
         protected List<FSMAction> m_actions = new List<FSMAction>();
         protected Dictionary<string, int> m_transition = new Dictionary<string, int>();
         protected FSM m_owner;
 
-        public FSMState(int val, FSM owner, bool bDefault = false)
+        public FSMState(string name, FSM owner, bool bDefault = false)
         {
-            m_id = val;
+			m_name = name;
+			m_id = name.GetHashCode();
             m_owner = owner;
             m_bDefault = bDefault;
         }
@@ -21,6 +23,11 @@ namespace RisingTide.Fsm
         {
             get { return m_id; }
         }
+
+		public string name
+		{
+			get{ return m_name; }
+		}
 
         public bool IsDefault()
         {

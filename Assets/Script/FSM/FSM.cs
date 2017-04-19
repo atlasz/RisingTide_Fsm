@@ -58,6 +58,10 @@ namespace RisingTide.Fsm
 
         public void DisableFSM()
         {
+			if(m_curState != null)
+			{
+				m_curState.OnExit();
+			}
             //m_bActive = false;
             foreach (FSMState state in m_dicStates.Values)
             {

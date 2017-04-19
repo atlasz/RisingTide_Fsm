@@ -34,6 +34,18 @@ namespace RisingTide.Fsm
             return m_curState;
         }
 
+		//todo
+		//temp function
+		public Dictionary<int, FSMState> GetAllStates()
+		{
+			return m_dicStates;
+		}
+
+		public Dictionary<string, int> GetAllGlobalTransition()
+		{
+			return m_transition;
+		}
+
         public void DispatchEvent(string evt)
         {
             if (m_transition.ContainsKey(evt))

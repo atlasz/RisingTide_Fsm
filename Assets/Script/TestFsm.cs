@@ -6,6 +6,7 @@ using RisingTide.Fsm;
 public class TestFsm : MonoBehaviour {
 
 	private FSM m_fsm;
+	public FSM fsm {get{return m_fsm;}}
 	// Use this for initialization
 	void Start () {
 		m_fsm = new FSM();
@@ -22,6 +23,7 @@ public class TestFsm : MonoBehaviour {
 		state2.AddTransition("log", state1.id);
 
 		m_fsm.AddTransition("g_calc", state2.id);
+		m_fsm.AddTransition("g_log", state1.id);
 
 		m_fsm.AddState(state1);
 		m_fsm.AddState(state2);

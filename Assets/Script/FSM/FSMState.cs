@@ -96,6 +96,16 @@ namespace RisingTide.Fsm
                 m_actions[i].OnStateComplete();
             }
         }
+
+		/// <summary>
+		/// temp
+		/// todo
+		/// </summary>
+		/// <returns>The transitions.</returns>
+		public Dictionary<string, int> GetTransitions()
+		{
+			return m_transition;
+		}
     }
 }
 

@@ -40,6 +40,6 @@ public class TestFsm : MonoBehaviour {
 		yield return new WaitForSeconds(3.0f);
 		m_fsm.DispatchEvent("g_calc");
 		yield return new WaitForSeconds(3.0f);
-		m_fsm.GetCurrentState().DispatchEvent("log");
+		m_fsm.DispatchEvent("log");
 	}
 }

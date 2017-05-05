@@ -12,6 +12,7 @@ namespace RisingTide.Fsm
 
         private bool m_bInit = false;
         private bool m_bPause = false;
+		private bool m_bSwitchState = false;
         //private bool m_bActive = false;// if we have no manager, we don't need active
 
         public void Initialize()
@@ -50,8 +51,16 @@ namespace RisingTide.Fsm
         {
             if (m_transition.ContainsKey(evt))
             {
-                EnterState(m_transition[evt]);
+                TryEnterState(m_transition[evt]);
             }
+			else
+			{
+				Dictionary<string, int> localTranitions = m_curState.GetTransitions();
+				if(localTranitions.ContainsKey(evt))
+				{
+					TryEnterState(localTranitions[evt]);
+				}
+			}
         }
 
         public void EnableFSM()
@@ -91,9 +100,9 @@ namespace RisingTide.Fsm
             m_bPause = false;
         }
 
-        public void EnterState(int id)
+        public void TryEnterState(int id)
         {
-            if(!m_bInit)
+			if(!m_bInit || m_bSwitchState)
             {
                 return;
             }
@@ -106,9 +115,11 @@ namespace RisingTide.Fsm
             FSMState state;
             if(m_dicStates.TryGetValue(id, out state))
             {
+				m_bSwitchState = true;
                 m_curState.OnExit();
                 m_curState = state;
                 m_curState.OnEnter();
+				m_bSwitchState = false;
             }
         }
 

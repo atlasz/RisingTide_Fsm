@@ -44,7 +44,7 @@ namespace RisingTide.Fsm
             m_startTime += Time.deltaTime;
             if (m_startTime > 2f)
             {
-                m_owner.DispatchEvent("log");
+				fsm.DispatchEvent("log");
             }
         }
 

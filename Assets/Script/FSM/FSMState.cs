@@ -44,17 +44,10 @@ namespace RisingTide.Fsm
             m_transition[evt] = stateId;
         }
 
-        public void DispatchEvent(string evt)
-        {
-            if(m_transition.ContainsKey(evt))
-            {
-                m_owner.EnterState(m_transition[evt]);
-            }
-        }
-
         public void AddAction(FSMAction action)
         {
             m_actions.Add(action);
+			action.SetOwner(this);
         }
 
         public virtual void OnAwake()
